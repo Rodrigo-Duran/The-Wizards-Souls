@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private float playerActualSpeed;
     private bool canJump;
     private bool isJumping;
+    private bool isFalling;
+
 
     // Awake
     void Awake()
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
         playerActualSpeed = playerSpeed;
         canJump = true;
         isJumping = false;
+        isFalling = false;
     }
 
     private void Update()
@@ -65,29 +68,41 @@ public class PlayerController : MonoBehaviour
         //SE O JOGADOR APERTAR ESPAÇO
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
-            //CHECANDO SE ELE PODE PULAR
+            //SE ELE PUDER PULAR
             if (canJump)
             {
+                //ele está pulando
                 isJumping = true;
+                //movendo o rigidbody dele pela velocidade para cima
                 playerRB.velocity = new Vector2(horizontalMove, jumpForce);
+                //tocando animação de pulo
                 animator.SetInteger("transition", 4);
             }
             
         }
 
+        //SE O JOGADOR ESTIVER CAINDO
+        if (isFalling)
+        {
+            animator.SetInteger("transition", 5);
+        }
+
         //SE O JOGADOR MANTER APERTADO O SHIFT ESQUERDO
         if (Input.GetKey(KeyCode.LeftShift))
         {
+            //ele está correndo, consequentemente aumenta-se sua velocidade
             isRunning = true;
             playerActualSpeed = playerSpeed * 3;
         }
         //SE O JOGADOR NÃO TIVER APERTANDO O SHIFT ESQUERDO
         else
         {
+            //ele não está correndo, portanto retorna a velocidade padrão
             isRunning = false;
             playerActualSpeed = playerSpeed;
         }
+
+        //PAUSE
 
         //SE O JOGADOR APERTAR ESC
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -107,26 +122,38 @@ public class PlayerController : MonoBehaviour
     // FixedUpdate
     void FixedUpdate()
     {
-
+        //Movendo o Rigidbody pela velocidade dele
         playerRB.velocity = new Vector2(horizontalMove * playerActualSpeed, playerRB.velocity.y);
 
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        //Saindo da colisão com o chão
         if (collision.gameObject.tag == "Ground")
         {
-            canJump = false;
             Debug.Log("EXIT COLLISION WITH GROUND");
+
+            //não pode pular
+            canJump = false;
+            
+            //Se ele não estiver pulando, então ele está caindo
+            if (!isJumping)
+            {
+                isFalling = true;
+            }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //Entrando em colisão com o chão
         if (collision.gameObject.tag == "Ground")
         {
+            //ele pode pular, não esta mais pulando e nem caindo
             canJump = true;
             isJumping = false;
+            isFalling = false;
             Debug.Log("ENTER COLLISION WITH GROUND");
         }
     }
