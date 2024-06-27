@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         //Saindo da colisão com o chão
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Platforms")
         {
             Debug.Log("EXIT COLLISION WITH GROUND");
 
@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Entrando em colisão com o chão
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Platforms")
         {
             //ele pode pular, não esta mais pulando e nem caindo
             canJump = true;

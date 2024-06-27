@@ -23,7 +23,7 @@ public class MagicsController : MonoBehaviour
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         //setando velocidade da magia pra 8
-        speed = 8f;
+        speed = 16f;
 
         //setando a posicao x e y do player no momento da criação da magia
         playerInitialPositionX = player.position.x;

@@ -25,6 +25,7 @@ public class ShootingController : MonoBehaviour
     void Update()
     {
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        //Debug.Log(mousePosition);
         
         Vector3 rotation = mousePosition - transform.position;
 
