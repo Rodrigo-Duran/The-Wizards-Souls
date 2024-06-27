@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Ground
   - Platforms
+  - EnemyPath
+  - RightPoint
+  - LeftPoint
+  - PointCloseToEnemy
+  - Magic
+  - Soul
+  - EnemyMagic
   layers:
   - Default
   - TransparentFX

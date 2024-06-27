@@ -12,14 +12,15 @@ public class PlayerController : MonoBehaviour
 
     //Movement
     private float horizontalMove;
-    [SerializeField] private float playerSpeed;
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float playerSpeed = 5f;
+    [SerializeField] private float jumpForce = 9f;
     private bool isRunning;
     private float playerActualSpeed;
     private bool canJump;
     private bool isJumping;
     private bool isFalling;
 
+    [SerializeField] private EnemyController enemy;
 
     // Awake
     void Awake()
@@ -155,6 +156,14 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             isFalling = false;
             Debug.Log("ENTER COLLISION WITH GROUND");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "PointCloseToEnemy")
+        {
+            enemy._playerIsClose = true;
         }
     }
 }
