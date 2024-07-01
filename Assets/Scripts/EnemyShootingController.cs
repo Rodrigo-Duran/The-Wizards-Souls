@@ -7,6 +7,7 @@ public class EnemyShootingController : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private GameObject magic;
     [SerializeField] private Transform magicTransform;
+    [SerializeField] private PlayerController playerController;
 
     private EnemyController enemyController;
     private bool canShoot;
@@ -43,11 +44,23 @@ public class EnemyShootingController : MonoBehaviour
 
         }
 
-        if (enemyController._playerIsClose && canShoot)
+        if (enemyController._playerIsClose && canShoot && !enemyController._enemyIsDead && !playerController._playerIsDead)
         {
-            canShoot = false;
-            Instantiate(magic, magicTransform.position, Quaternion.identity);
+            StartCoroutine(Attacking());
+            /*canShoot = false;
+            Instantiate(magic, magicTransform.position, Quaternion.identity);*/
         }
+
+    }
+
+    IEnumerator Attacking()
+    {
+        canShoot = false;
+        enemyController._enemyIsAttacking = true;
+        yield return new WaitForSeconds(0.6f);
+        Instantiate(magic, magicTransform.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.6f);
+        enemyController._enemyIsAttacking = false;
 
     }
 }

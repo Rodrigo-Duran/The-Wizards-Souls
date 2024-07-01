@@ -8,6 +8,8 @@ public class ShootingController : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject magic;
     [SerializeField] private Transform magicTransform;
+
+    private PlayerController playerController;
     private Vector3 mousePosition;
     private bool canShoot;
     private float timer;
@@ -16,9 +18,10 @@ public class ShootingController : MonoBehaviour
     // Awake 
     void Awake()
     {
+        playerController = GetComponentInParent<PlayerController>();
         canShoot = true;
         timer = 0f;
-        timeBetweenShooting = 0.5f;
+        timeBetweenShooting = 0.6f;
     }
 
     // Update
@@ -46,10 +49,21 @@ public class ShootingController : MonoBehaviour
 
         if (Input.GetMouseButton(0) && canShoot)
         {
-            canShoot = false;
-            Instantiate(magic, magicTransform.position, Quaternion.identity);
+            /*canShoot = false;
+            Instantiate(magic, magicTransform.position, Quaternion.identity);*/
+            StartCoroutine(Attacking());
 
         }
 
+    }
+
+    IEnumerator Attacking()
+    {
+        canShoot = false;
+        playerController._isAttacking = true;
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(magic, magicTransform.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.2f);
+        playerController._isAttacking = false;
     }
 }

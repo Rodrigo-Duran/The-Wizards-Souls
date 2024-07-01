@@ -81,7 +81,7 @@ public class MagicsController : MonoBehaviour
         //se a magia for solta pelo player
         if (gameObject.tag == "Magic")
         {
-            if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "LeftPoint" || collision.gameObject.tag == "RightPoint" || collision.gameObject.tag == "PointCloseToEnemy")
+            if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Magic" || collision.gameObject.tag == "LeftPoint" || collision.gameObject.tag == "RightPoint" || collision.gameObject.tag == "PointCloseToEnemy")
             {
                 //ignorar colisao com player
                 Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), collision.gameObject.GetComponent<BoxCollider2D>());
@@ -95,7 +95,7 @@ public class MagicsController : MonoBehaviour
         //se a magia for solta pelo inimigo
         else if (gameObject.tag == "EnemyMagic")
         {
-            if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "LeftPoint" || collision.gameObject.tag == "RightPoint" || collision.gameObject.tag == "PointCloseToEnemy")
+            if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyMagic" || collision.gameObject.tag == "LeftPoint" || collision.gameObject.tag == "RightPoint" || collision.gameObject.tag == "PointCloseToEnemy")
             {
                 //ignorar colisao com inimigo
                 Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), collision.gameObject.GetComponent<BoxCollider2D>());
