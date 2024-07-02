@@ -5,72 +5,41 @@ using UnityEngine;
 public class Puzzle1ButtonsController : MonoBehaviour
 {
 
-    [SerializeField] GameController gameController;
+    [SerializeField] Puzzle1Controller puzzleController;
+    [SerializeField] private Puzzle1PlatformController platformController;
+    [SerializeField] public bool isPressed; //PUBLIC PRA TESTE
 
-    private Animator animator;
+    //public SpriteRenderer spriteRenderer;
+    public Animator animator;
 
     private void Awake()
     {
+        //spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        isPressed = false;
     }
 
     private void Update()
-    {
-        if (gameObject.tag == "PuzzleButton1")
-        {
-            if (gameController._button1WasPressed)
-            {
-                StartCoroutine(PressingButton());
-            }
-        }
-        else if (gameObject.tag == "PuzzleButton2")
-        {
-            if (gameController._button2WasPressed)
-            {
-                StartCoroutine(PressingButton());
-            }
-        }
-        else if (gameObject.tag == "PuzzleButton3")
-        {
-            if (gameController._button3WasPressed)
-            {
-                StartCoroutine(PressingButton());
-            }
-        }
+    { 
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Magic")
         {
-            if (gameObject.tag == "PuzzleButton1")
-            {
-                gameController._button1WasPressed = true;
-                gameController._howManyButtonsArePressed += 1;
-            }
-            else if (gameObject.tag == "PuzzleButton2")
-            {
-                gameController._button2WasPressed = true;
-                gameController._howManyButtonsArePressed += 1;
-            }
-            else if (gameObject.tag == "PuzzleButton3")
-            {
-                gameController._button3WasPressed = true;
-                gameController._howManyButtonsArePressed += 1;
-            }
-
-            if (!gameController._puzzleStarted)
-            {
-                gameController._puzzleStarted = true;
-            }
+            if(!isPressed && platformController.platformIsReady) StartCoroutine(PressingButton());
+            if(!puzzleController._puzzleStarted && platformController.platformIsReady) puzzleController._puzzleStarted = true;
         }
     }
 
     IEnumerator PressingButton()
     {
-        Debug.Log("BUTTON PRESSED");
+        isPressed = true;
+        puzzleController._buttonsPressed += 1;
+        //Debug.Log("BUTTON PRESSED");
         animator.Play("ButtonPressed");
         yield return new WaitForSeconds(0.5f);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     //Components
     private Rigidbody2D playerRB;
     private Animator animator;
+    [SerializeField] Transform playerRotatePoint;
 
     //Movement
     [SerializeField] private float playerSpeed = 5f;
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
         //PEGANDO INPUT APENAS HORIZONTAL
         horizontalMove = Input.GetAxisRaw("Horizontal");
 
-        //ROTACIONANDO O PLAYER PRO LADO DO INPUT
+        //ROTACIONANDO O PLAYER PRO LADO DO INPUT CASO ELE ESTIVER MOVIMENTANDO
         if (horizontalMove > 0)
         {
             transform.eulerAngles = new Vector2(0, 0);
@@ -96,6 +97,17 @@ public class PlayerController : MonoBehaviour
         else if (horizontalMove < 0)
         {
             transform.eulerAngles = new Vector2(0, 180);
+        }
+        //ROTACIONANDO O PLAYER PRO LADO DO MOUSE INPUT CASO ELE ESTIVER PARADO
+        else if (horizontalMove == 0)
+        {
+            if (playerRotatePoint.rotation.z < 0.75f && playerRotatePoint.rotation.z > -0.7f) {
+                transform.eulerAngles = new Vector2(0, 0);
+            }
+            else
+            {
+                transform.eulerAngles = new Vector2(0, 180);
+            }
         }
 
         //ANIMAÇÕES

@@ -753,7 +753,7 @@ GameObject:
   - component: {fileID: 367570485}
   m_Layer: 0
   m_Name: PuzzleButton2
-  m_TagString: PuzzleButton2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -770,7 +770,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927dacc07a31ba440abaaf635b353088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 1816869581}
+  puzzleController: {fileID: 2016835267}
+  platformController: {fileID: 857134796}
+  isPressed: 0
+  animator: {fileID: 0}
 --- !u!61 &367570482
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1050,7 +1053,7 @@ GameObject:
   - component: {fileID: 386245374}
   m_Layer: 0
   m_Name: RotatePoint
-  m_TagString: Untagged
+  m_TagString: PlayerRotatePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1086,6 +1089,7 @@ MonoBehaviour:
   mainCamera: {fileID: 1816869577}
   magic: {fileID: 8684283685235463858, guid: 55ecf5cebf1fa4541a7a814d7472cb29, type: 3}
   magicTransform: {fileID: 1185745523}
+  mousePositionInShooting: {x: 0, y: 0, z: 0}
 --- !u!1 &392130996
 GameObject:
   m_ObjectHideFlags: 0
@@ -41208,8 +41212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d49098c65d0d68347bb4526ac01889e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 1816869581}
-  speed: 1
+  puzzle1Controller: {fileID: 2016835267}
   startingPoint: {fileID: 257978907}
   endPoint: {fileID: 1049970046}
   spritesList:
@@ -41217,6 +41220,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f0e97d4854f1ae548a565ab9b41744f0, type: 3}
   - {fileID: 21300000, guid: a1a8303d21288c84bbdac3142d6fa2d7, type: 3}
   - {fileID: 21300000, guid: c228102c680153e42aeff2d38e88e9b2, type: 3}
+  speed: 1
+  platformIsReady: 0
 --- !u!1 &878378203
 GameObject:
   m_ObjectHideFlags: 0
@@ -41570,6 +41575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea57df11d37ccce4a83e4a425c99c852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRotatePoint: {fileID: 386245373}
   playerSpeed: 5
   jumpForce: 9
   enemy: {fileID: 1974843900}
@@ -41674,7 +41680,7 @@ GameObject:
   - component: {fileID: 960350360}
   m_Layer: 0
   m_Name: PuzzleButton3
-  m_TagString: PuzzleButton3
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41706,7 +41712,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927dacc07a31ba440abaaf635b353088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 1816869581}
+  puzzleController: {fileID: 2016835267}
+  platformController: {fileID: 857134796}
+  isPressed: 0
+  animator: {fileID: 0}
 --- !u!61 &960350358
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -51813,9 +51822,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   environment: {fileID: 1553749345}
-  button1: {fileID: 2019374963}
-  button2: {fileID: 367570480}
-  button3: {fileID: 960350355}
 --- !u!1 &1854573035
 GameObject:
   m_ObjectHideFlags: 0
@@ -95237,6 +95243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2016835266}
+  - component: {fileID: 2016835267}
   m_Layer: 0
   m_Name: Puzzle1
   m_TagString: Untagged
@@ -95265,6 +95272,25 @@ Transform:
   - {fileID: 257978908}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2016835267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016835265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470527d2805cbfc439faf86089411f71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button1: {fileID: 2019374963}
+  button1Controller: {fileID: 2019374964}
+  button2: {fileID: 367570480}
+  button2Controller: {fileID: 367570481}
+  button3: {fileID: 960350355}
+  button3Controller: {fileID: 960350357}
+  initialButtonsSprite: {fileID: 0}
 --- !u!1 &2019374963
 GameObject:
   m_ObjectHideFlags: 0
@@ -95280,7 +95306,7 @@ GameObject:
   - component: {fileID: 2019374964}
   m_Layer: 0
   m_Name: PuzzleButton1
-  m_TagString: PuzzleButton1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95297,7 +95323,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927dacc07a31ba440abaaf635b353088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 1816869581}
+  puzzleController: {fileID: 2016835267}
+  platformController: {fileID: 857134796}
+  isPressed: 0
+  animator: {fileID: 0}
 --- !u!95 &2019374965
 Animator:
   serializedVersion: 5

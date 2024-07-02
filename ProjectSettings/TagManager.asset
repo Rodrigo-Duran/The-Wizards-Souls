@@ -13,9 +13,7 @@ TagManager:
   - Magic
   - Soul
   - EnemyMagic
-  - PuzzleButton1
-  - PuzzleButton2
-  - PuzzleButton3
+  - PlayerRotatePoint
   layers:
   - Default
   - TransparentFX

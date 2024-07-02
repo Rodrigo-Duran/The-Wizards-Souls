@@ -14,6 +14,7 @@ public class ShootingController : MonoBehaviour
     private bool canShoot;
     private float timer;
     private float timeBetweenShooting;
+    public Vector3 mousePositionInShooting;
 
     // Awake 
     void Awake()
@@ -22,6 +23,7 @@ public class ShootingController : MonoBehaviour
         canShoot = true;
         timer = 0f;
         timeBetweenShooting = 0.6f;
+        mousePositionInShooting = Vector3.zero;
     }
 
     // Update
@@ -49,10 +51,8 @@ public class ShootingController : MonoBehaviour
 
         if (Input.GetMouseButton(0) && canShoot)
         {
-            /*canShoot = false;
-            Instantiate(magic, magicTransform.position, Quaternion.identity);*/
+            mousePositionInShooting = mousePosition;
             StartCoroutine(Attacking());
-
         }
 
     }

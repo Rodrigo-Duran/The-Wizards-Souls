@@ -4,36 +4,40 @@ using UnityEngine;
 
 public class Puzzle1PlatformController : MonoBehaviour
 {
-
-    [SerializeField] GameController gameController;
-    [SerializeField] private float speed = 1f;
+    
+    [SerializeField] Puzzle1Controller puzzle1Controller;
     [SerializeField] GameObject startingPoint;
     [SerializeField] GameObject endPoint;
     [SerializeField] List<Sprite> spritesList;
-    
+
+    //Platform Attributes
+    [SerializeField] private float speed = 1f;
     private SpriteRenderer spriteRenderer;
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D platformRB;
     private Vector2 direction;
+    [SerializeField] public bool platformIsReady; //TESTE
 
     // Awake
     void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        platformRB = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         direction.x = 0f;
         direction.y = 0f;
+        platformIsReady = true;
     }
 
     // Update
     void Update()
     {
-        if (gameController._puzzleCompleted)
+        if (puzzle1Controller._puzzleCompleted)
         {
             direction.y = 1f;
+            platformIsReady = false;
         }
 
-        switch (gameController._howManyButtonsArePressed)
+        switch (puzzle1Controller._buttonsPressed)
         {
             case 0:
                 spriteRenderer.sprite = spritesList[0];
@@ -56,7 +60,7 @@ public class Puzzle1PlatformController : MonoBehaviour
     //FixedUpdate
     private void FixedUpdate()
     {
-        rigidbody.velocity = new Vector2(direction.x, direction.y).normalized * speed;
+        platformRB.velocity = new Vector2(direction.x, direction.y).normalized * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -71,6 +75,7 @@ public class Puzzle1PlatformController : MonoBehaviour
         {
             Debug.Log("Platform touchs starting point");
             direction.y = 0f;
+            platformIsReady = true;
         }
     }
 
@@ -84,13 +89,10 @@ public class Puzzle1PlatformController : MonoBehaviour
 
     IEnumerator PlatformGoingDown()
     {
-        gameController._button1WasPressed = false;
-        gameController._button2WasPressed = false;
-        gameController._button3WasPressed = false;
         yield return new WaitForSeconds(2f);
         Debug.Log("Platform going down");
         direction.y = -1f;
-        StartCoroutine(gameController.RestartingPuzzle());
+        puzzle1Controller.StartPuzzle();
     }
 
 }

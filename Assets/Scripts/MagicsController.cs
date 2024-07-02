@@ -11,6 +11,7 @@ public class MagicsController : MonoBehaviour
 
     private Animator animator;
     private Rigidbody2D magicRB;
+    private ShootingController shootingController;
 
     private Vector3 mousePosition;
     private float speed;
@@ -18,7 +19,6 @@ public class MagicsController : MonoBehaviour
     private float playerInitialPositionY;
     private Vector3 direction;
     private Vector3 rotation;
-    
 
     // Awake
     void Awake()
@@ -28,7 +28,9 @@ public class MagicsController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         magicRB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        shootingController = GameObject.FindWithTag("PlayerRotatePoint").GetComponent<ShootingController>();
+        //mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = shootingController.mousePositionInShooting;
 
         //setando velocidade da magia pra 8
         speed = 16f;
