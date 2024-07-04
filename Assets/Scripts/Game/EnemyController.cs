@@ -159,7 +159,7 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator Death()
     {
-        Debug.Log("ENEMY DIED");
+        //Debug.Log("ENEMY DIED");
         yield return new WaitForSeconds(2.5f);
         //Debug.Log(transform.position);
         Instantiate(soul, soulTransform.position, Quaternion.identity);
