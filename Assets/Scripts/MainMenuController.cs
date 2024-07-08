@@ -15,17 +15,9 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject pressAnyButton_PT;
     [SerializeField] private GameObject pressAnyButton_EN;
 
-
-    //TESTE -------------------------------------
-    [SerializeField] private TMP_Dropdown languageDropdown;
-    //-------------------------------------------
-
-    //private bool homePanelActivated;
-
     //Awake
     void Awake()
     {
-        //homePanelActivated = true;
     }
 
     // Update is called once per frame
@@ -35,12 +27,12 @@ public class MainMenuController : MonoBehaviour
         if (homePanel.activeInHierarchy)
         {
 
-            if(LanguageManager.language == "portuguese")
+            if(ConfigurationsManager.language == 0)
             {
                 pressAnyButton_EN.SetActive(false);
                 pressAnyButton_PT.SetActive(true);
             }
-            else if (LanguageManager.language == "english")
+            else if (ConfigurationsManager.language == 1)
             {
                 pressAnyButton_PT.SetActive(false);
                 pressAnyButton_EN.SetActive(true);
@@ -51,25 +43,9 @@ public class MainMenuController : MonoBehaviour
                 homePanel.SetActive(false);
                 mainMenuPanel.SetActive(true);
                 Debug.Log("MainMenuPanel ACTIVATED");
-                //homePanelActivated = false;
             }
         }
     }
-
-    #region LanguageHandler
-    //MÉTODO USADO NO CHANGE VALUE DO DROPDOWN DE SELECT LANGUAGE
-    public void ChangeLanguage(int value)
-    {
-        if (value == 0)
-        {
-            LanguageManager.language = "portuguese";
-        }
-        else if (value == 1)
-        {
-            LanguageManager.language = "english";
-        }
-    }
-    #endregion
 
     public void NewGame()
     {

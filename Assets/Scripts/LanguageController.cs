@@ -4,20 +4,29 @@ using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
 
-public class LabelsController : MonoBehaviour
+public class LanguageController : MonoBehaviour
 {
+
+    //LABELS
+    [Header("FOR LABELS: ")]
+
     [Header("Portuguese: ")]
     [SerializeField] private string portuguese;
-    //For Dropdowns
-    [SerializeField] private List<string> portugueseOptions;
 
     [Header("English: ")]
     [SerializeField] private string english;
-    //For Dropdowns
-    [SerializeField] private List<string> englishOptions;
+
+    //DROPDOWNS
+    [Header("FOR DROPDOWNS: ")]
 
     [Header("Is Dropdown: ")]
     [SerializeField] private bool isDropdown = false;
+
+    [Header("Portuguese Options: ")]
+    [SerializeField] private List<string> portugueseOptions;
+
+    [Header("English Options: ")]
+    [SerializeField] private List<string> englishOptions;
 
     private TMP_Dropdown dropdown = null;
 
@@ -39,13 +48,13 @@ public class LabelsController : MonoBehaviour
         if (!isDropdown)
         {
             //SE ESTIVER EM PORTUGUES
-            if (LanguageManager.language == "portuguese")
+            if (ConfigurationsManager.language == 0)
             {
                 //MUDA O TEXTO PARA O PORTUGUES
                 label.text = portuguese;
             }
             //SE ESTIVER EM INGLES
-            else if (LanguageManager.language == "english")
+            else if (ConfigurationsManager.language == 1)
             {
                 //MUDA O TEXTO PARA INGLES
                 label.text = english;
@@ -55,7 +64,7 @@ public class LabelsController : MonoBehaviour
         else
         {
             //SE ESTIVER EM PORTUGUES
-            if (LanguageManager.language == "portuguese")
+            if (ConfigurationsManager.language == 0)
             {
                 //MUDA TODAS AS OPCOES DO DROPDOWN PARA PORTUGUES
                 for (int i = 0; i < dropdown.options.Count; i++)
@@ -67,7 +76,7 @@ public class LabelsController : MonoBehaviour
                 label.text = portugueseOptions[dropdown.value];
             }
             //SE ESTIVER EM INGLES
-            else if (LanguageManager.language == "english")
+            else if (ConfigurationsManager.language == 1)
             {
                 //MUDA TODAS AS OPCOES DO DROPDOWN PARA INGLES
                 for (int i = 0; i < dropdown.options.Count; i++)
