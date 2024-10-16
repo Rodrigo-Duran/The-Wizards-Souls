@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -49,6 +48,11 @@ public class MainMenuController : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Phase1");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
